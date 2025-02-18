@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-validation-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: email-validation-app
+  template:
+    metadata:
+      labels:
+        app: email-validation-app
+    spec:
+      containers:
+      - name: email-validation-app
+        image: your-docker-image:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ENV_VAR_NAME
+          value: "value"
+        - name: SHELLCHECK_PATH
+          value: "/usr/local/bin/shellcheck" # Ensure ShellCheck is installed at this path
+        # ...additional configuration...
